@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://www.isoloom.com/schema/v1.json
+# OWASP SKF JWT None Algorithm (OWASP Security Knowledge Framework labs, by Glenn ten Cate, Riccardo ten Cate and the SKF contributors) as an Isoloom spec:
+# a Flask API that accepts JSON Web Tokens whose header says the algorithm is NONE (JWT none algorithm). The SKF lab folder python/JWT-null is
+# vendored unchanged in build/web/app/ and built by an overlay of its Dockerfile (build/web/Dockerfile).
+# `isoloom generate`, then `isoloom run docker`.
+version: 1
+name: skf-jwt-null
+
+networks:
+  lab: { cidr: 10.60.146.0/24, internet: false }
+
+machines:
+  web:
+    networks: { lab: 10 }
+    services: [{ port: 5000, name: web, http: true, publish: 5050 }]
+    resources: { cpus: 1, memory_mb: 256 }
+    docker:
+      build: build/web
+
+checks:
+  - name: the lab answers
+    http: http://web:5000/
+    wait: 120
+  - name: user/user gets a JWT from /auth
+    script: checks/auth.sh
+
+message: |
+  OWASP SKF JWT None Algorithm answers at http://localhost:{{ machines.web.services.0.publish }}/.
+  Log in as user/user and decode the token you get. What does the server do with its alg field?
