@@ -4,11 +4,5 @@
   "question": "Forge an unsigned token to act as the admin user (JWT none algorithm). The demo account is user/user.",
   "category": "WEB",
   "difficulty": 2,
-  "evidence_kind": "SECRET",
-  "capabilities": [
-    "jwt",
-    "authentication-bypass",
-    "cryptography",
-    "api"
-  ]
+  "evidence_kind": "SECRET"
 }
