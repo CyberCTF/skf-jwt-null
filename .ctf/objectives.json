@@ -1,0 +1,41 @@
+{
+  "objectives": [
+    {
+      "key": "main",
+      "title": "Read the flag",
+      "prompt": "Forge an unsigned token as admin and retrieve the flag (/ctf/flag).",
+      "check": {
+        "evidence": "SECRET",
+        "format": "FLAG{%s}"
+      },
+      "dev": "FLAG{dev-skf-jwt-null}",
+      "hints": [
+        "Look at the alg field in the token header.",
+        "Read about the JWT none algorithm weakness."
+      ],
+      "steps": [
+        {
+          "key": "field",
+          "title": "Find the field",
+          "prompt": "Which JWT header field names the signing algorithm?",
+          "check": {
+            "answer": [
+              "alg"
+            ]
+          }
+        },
+        {
+          "key": "value",
+          "title": "Name the value",
+          "prompt": "Which algorithm value makes the server skip the signature?",
+          "check": {
+            "answer": [
+              "none",
+              "null"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

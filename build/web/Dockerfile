@@ -3,6 +3,7 @@
 # - templates/index.html is edited in the image so that its script calls /auth and /protected on the
 #   page's own host and port instead of a hard-coded port 5000 (the lab is published on 5050, since
 #   macOS keeps 5000 for AirPlay).
+# - it creates /ctf owned by the lab user, for the per-player flag.
 
 ### Static layers
 
@@ -32,6 +33,9 @@ RUN sed -i 's|"http://" + host + ":5000/|"//" + window.location.host + "/|' temp
 RUN chown -R app:app /home/app/JWT-null
 
 # Switching to the limited user
+# Overlay: the flag folder /ctf, owned by the lab user so the flag init (which runs as that user) can write it.
+RUN mkdir -p /ctf && chown app:app /ctf
+
 USER app
 
 # Installing needed binaries and deps

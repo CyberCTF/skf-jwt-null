@@ -1,7 +1,7 @@
 {
   "title": "OWASP SKF JWT None Algorithm",
   "description": "A Flask application that issues JSON Web Tokens at /auth and reads them at /protected. When the token header names the NONE algorithm, the signature is not checked.",
-  "question": "Forge an unsigned token to act as the admin user (JWT none algorithm). The demo account is user/user.",
+  "question": "Forge an unsigned token to act as the admin user (JWT none algorithm); demo account user/user. The flag is in /ctf/flag.",
   "category": "WEB",
   "difficulty": 2,
   "evidence_kind": "SECRET"
